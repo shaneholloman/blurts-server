@@ -117,6 +117,9 @@ export const projects = locations.flatMap((geo) =>
             "x-forced-client-region-token": createTestClientRegionToken(
               geo.name.toLowerCase(),
             ),
+            ...(process.env.FXA_CI_SECRET
+              ? { "fxa-ci": process.env.FXA_CI_SECRET }
+              : {}),
           },
         },
       }) as const satisfies Project,
